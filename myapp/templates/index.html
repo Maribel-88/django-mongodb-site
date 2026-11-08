@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django & MongoDB Full Stack App</title>
+    <!-- Seamless link to your traditional styling sheet file -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Create Account</h2>
+        <form id="registrationForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <button type="submit">Register</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <!-- Link directly to your interactive frontend logic file -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
