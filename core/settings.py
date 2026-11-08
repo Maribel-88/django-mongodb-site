@@ -10,10 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Initialize environment variables
+env = environ.Env()
+# Read the .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -77,15 +84,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'my_website_db',  # This names your database collection inside MongoDB Atlas
+        'NAME': 'my_website_db',  
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            # PASTE YOUR ACTUAL MONGODB ATLAS CONNECTION STRING BELOW:
-            # Remember to swap out <username> and <password> for your database user credentials!
-            'host': 'mongodb+srv://maribelpajares:jameshenry@cluster0.rzughg9.mongodb.net/',
+            'host': env('DATABASE_URL'),  # No extra quotes around this function call!
+            'serverSelectionTimeoutMS': 5000,
+            'connectTimeoutMS': 5000
         }
     }
 }
+
 
 
 # Password validation
